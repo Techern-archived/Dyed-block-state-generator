@@ -1,10 +1,10 @@
-group 'com.techern'
+group 'org.techern'
 version '0.0.1-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = "com.techern.dbsg.DyedBlockStateGenerator"
+mainClassName = "org.techern.dbsg.DyedBlockStateGenerator"
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 

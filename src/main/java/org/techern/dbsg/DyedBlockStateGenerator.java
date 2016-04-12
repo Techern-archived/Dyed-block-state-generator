@@ -1,4 +1,4 @@
-package com.techern.dbsg;
+package org.techern.dbsg;
 
 /**
  * DyedBlockStateGenerator; A block state generator for dyed blocks
