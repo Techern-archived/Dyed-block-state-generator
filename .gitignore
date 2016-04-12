@@ -17,3 +17,7 @@ hs_err_pid*
 #IntelliJ IDEA files
 .idea/
 *.iml
+
+#Generated while running
+templates/
+generated/
