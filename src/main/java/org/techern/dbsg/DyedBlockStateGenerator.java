@@ -33,7 +33,7 @@ public class DyedBlockStateGenerator {
 
         Path templatePath = rootPath.resolve("templates");
 
-        Path outputPath = rootPath.resolve("generated");
+        final Path outputPath = rootPath.resolve("generated");
 
         LOGGER.info("Template path is " + templatePath.toString() + ", output path is " + outputPath.toString());
 
@@ -68,6 +68,28 @@ public class DyedBlockStateGenerator {
                 }
 
                 LOGGER.info("Found file: " + filePath.getFileName().toString());
+
+                if (filePath.getFileName().toString().endsWith(".json")) {
+                    //It's legit!
+
+                    Path outputFileFolderPath = outputPath.resolve(filePath.getFileName().toString());
+
+                    if (Files.notExists(outputFileFolderPath)) {
+                        Files.createDirectory(outputFileFolderPath);
+                    }
+
+                    for (DyeColor color : DyeColor.values()) {
+
+                        String fileName = color.getName().concat("_").concat(filePath.getFileName().toString());
+
+                        LOGGER.info(fileName);
+
+                    }
+
+                } else {
+                    //Bah.
+                    LOGGER.warning("Invalid file format: " + filePath.getFileName().toString());
+                }
 
                 return result;
             }
