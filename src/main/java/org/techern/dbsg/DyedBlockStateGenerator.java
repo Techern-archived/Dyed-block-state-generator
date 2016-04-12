@@ -1,10 +1,9 @@
 package org.techern.dbsg;
 
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
+import java.nio.file.*;
 
-import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.logging.Logger;
 
 /**
@@ -46,6 +45,33 @@ public class DyedBlockStateGenerator {
             Files.createDirectory(outputPath);
             LOGGER.warning("Output folder does not exist; Creating");
         }
+
+        Files.walkFileTree(templatePath, new SimpleFileVisitor<Path>() {
+
+            /**
+             * Invoked for a file in a directory.
+             * <p/>
+             * <p> Unless overridden, this method returns {@link FileVisitResult#CONTINUE
+             * CONTINUE}.
+             *
+             * @param filePath The {@link Path} to the file
+             * @param attrs The {@link BasicFileAttributes} of the file
+             *
+             * @since 0.0.1
+             */
+            @Override
+            public FileVisitResult visitFile(Path filePath, BasicFileAttributes attrs) throws IOException {
+                FileVisitResult result = super.visitFile(filePath, attrs);
+
+                if (!result.equals(FileVisitResult.CONTINUE)) {
+                    return result;
+                }
+
+                LOGGER.info("Found file: " + filePath.getFileName().toString());
+
+                return result;
+            }
+        });
 
 
 
