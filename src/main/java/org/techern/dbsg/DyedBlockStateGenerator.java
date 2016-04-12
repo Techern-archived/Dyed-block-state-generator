@@ -1,5 +1,7 @@
 package org.techern.dbsg;
 
+import java.util.logging.Logger;
+
 /**
  * DyedBlockStateGenerator; A block state generator for dyed blocks
  *
@@ -8,13 +10,20 @@ package org.techern.dbsg;
 public class DyedBlockStateGenerator {
 
     /**
+     * The {@link Logger} used by {@link DyedBlockStateGenerator}
+     *
+     * @since 0.0.1
+     */
+    public static Logger LOGGER = Logger.getLogger("Generator");
+
+    /**
      * Runs {@link DyedBlockStateGenerator}
      *
      * @param arguments The list of arguments
      * @since 0.0.1
      */
     public static void main(String... arguments) {
-        System.out.println("Go away, I'm not ready to serve you yet");
+        LOGGER.info("Starting the dyed block state generator...");
     }
 
 }
