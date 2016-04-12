@@ -5,6 +5,7 @@ import java.nio.file.*;
 
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * DyedBlockStateGenerator; A block state generator for dyed blocks
@@ -72,6 +73,8 @@ public class DyedBlockStateGenerator {
                 if (filePath.getFileName().toString().endsWith(".json")) {
                     //It's legit!
 
+                    String baseContent = new String(Files.readAllBytes(filePath));
+
                     Path outputFileFolderPath = outputPath.resolve(filePath.getFileName().toString());
 
                     if (Files.notExists(outputFileFolderPath)) {
@@ -82,7 +85,17 @@ public class DyedBlockStateGenerator {
 
                         String fileName = color.getName().concat("_").concat(filePath.getFileName().toString());
 
-                        LOGGER.info(fileName);
+                        Path outputFilePath = outputFileFolderPath.resolve(fileName);
+
+                        String outputFileContent = baseContent.replaceAll(Pattern.quote("{color}"), color.getName());
+
+                        if (Files.exists(outputFilePath)) {
+                            Files.delete(outputFilePath);
+                        }
+
+                        Files.createFile(outputFilePath);
+
+                        Files.write(outputFilePath, outputFileContent.getBytes("UTF-8"), StandardOpenOption.WRITE);
 
                     }
 
@@ -95,7 +108,7 @@ public class DyedBlockStateGenerator {
             }
         });
 
-
+        LOGGER.info("Complete! Please check output directories or add templates if nothing worked");
 
     }
 
