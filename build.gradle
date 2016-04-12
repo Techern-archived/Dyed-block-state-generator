@@ -2,8 +2,11 @@ group 'com.techern'
 version '0.0.1-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
 
-sourceCompatibility = 1.5
+mainClassName = "com.techern.dbsg.DyedBlockStateGenerator"
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
